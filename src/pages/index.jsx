@@ -34,7 +34,6 @@ export async function getStaticProps() {
       totalVaccinations,
     },
     revalidate: 1,
-    fallback: true,
   }
 }
 
