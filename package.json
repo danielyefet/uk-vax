@@ -1,0 +1,19 @@
+{
+  "name": "covid-data",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "author": "Daniel Yefet <daniel.yefet@gmail.com>",
+  "dependencies": {
+    "autoprefixer": "^10.2.1",
+    "next": "^10.0.5",
+    "numeral": "^2.0.6",
+    "postcss": "^8.2.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "tailwindcss": "^2.0.2"
+  }
+}
