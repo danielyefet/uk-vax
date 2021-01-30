@@ -8,7 +8,9 @@ function App({ Component, pageProps }) {
                 🦠
                 </div>
             </header>
-            <Component {...pageProps} />
+            <div className="container p-3 mx-auto text-gray-200">
+                <Component {...pageProps} />
+            </div>
         </>
     );
 }
