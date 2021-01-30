@@ -1,4 +1,5 @@
 import VaccinationProgress from '../components/VaccinationProgress';
+import { getTotalFirstDoses, getTotalSecondDoses } from '../utils/vaccinations';
 
 function Index({ totalVaccinations }) {
   const { firstDose, secondDose } = totalVaccinations;
@@ -11,34 +12,16 @@ function Index({ totalVaccinations }) {
   );
 }
 
-async function getData({ latestBy }) {
-  let url = 'https://coronavirus.data.gov.uk/api/v1/data';
-  url += '?filters=areaName=United Kingdom;areaType=overview';
-  url += `&latestBy=${latestBy}`;
-  url += `&structure={"date":"date","value":"${latestBy}"}`;
-
-  try {
-    const response = await fetch(url);
-    const json = await response.json();
-    return json?.data[0]?.value;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export async function getStaticProps() {
-  const firstDose = await getData({ latestBy: 'cumPeopleVaccinatedFirstDoseByPublishDate' });
-  const secondDose = await getData({ latestBy: 'cumPeopleVaccinatedSecondDoseByPublishDate' });
-
   return {
     props: {
       totalVaccinations: {
-        firstDose,
-        secondDose,
+        firstDose: await getTotalFirstDoses(),
+        secondDose: await getTotalSecondDoses(),
       },
     },
     revalidate: 1,
   }
 }
 
-  export default Index;
+export default Index;
