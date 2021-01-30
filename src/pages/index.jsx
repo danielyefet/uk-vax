@@ -1,37 +1,41 @@
-import numeral from 'numeral';
-import ProgressBar from '../components/ProgressBar';
+import VaccinationProgress from '../components/VaccinationProgress';
 
 function Index({ totalVaccinations }) {
-
-  const totalPopulation = 66600000;
-  const formatedTotalVacinations = numeral(totalVaccinations).format();
-  const percentageVaccinated = `${((100 * totalVaccinations) / totalPopulation).toFixed(2)}%`;
+  const { firstDose, secondDose } = totalVaccinations;
 
   return (
-    <div className="text-gray-900 p-3 container mx-auto">
-      <ProgressBar label="Progress" percentage={percentageVaccinated} />
-      <p className="text-sm">Total Vacinations: {formatedTotalVacinations}</p>
-    </div>
+    <>
+      <VaccinationProgress title="First Dose" total={firstDose} />
+      <VaccinationProgress title="Second Dose" total={secondDose} />
+    </>
   );
 }
 
-export async function getStaticProps() {
-  let days = [];
+async function getData({ latestBy }) {
+  let url = 'https://coronavirus.data.gov.uk/api/v1/data';
+  url += '?filters=areaName=United Kingdom;areaType=overview';
+  url += `&latestBy=${latestBy}`;
+  url += `&structure={"date":"date","value":"${latestBy}"}`;
 
   try {
-    const response = await fetch('https://api.coronavirus.data.gov.uk/v2/data?areaType=overview&metric=cumPeopleVaccinatedFirstDoseByPublishDate&format=json');
-    const { body } = await response.json();
-    days = body;
+    const response = await fetch(url);
+    const json = await response.json();
+    return json?.data[0]?.value;
   } catch (error) {
     console.error(error);
   }
+}
 
-  const lastDay = days[days.length - 1];
-  const totalVaccinations = lastDay.cumPeopleVaccinatedFirstDoseByPublishDate;
+export async function getStaticProps() {
+  const firstDose = await getData({ latestBy: 'cumPeopleVaccinatedFirstDoseByPublishDate' });
+  const secondDose = await getData({ latestBy: 'cumPeopleVaccinatedSecondDoseByPublishDate' });
 
   return {
     props: {
-      totalVaccinations,
+      totalVaccinations: {
+        firstDose,
+        secondDose,
+      },
     },
     revalidate: 1,
   }
