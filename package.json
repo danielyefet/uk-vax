@@ -1,5 +1,5 @@
 {
-  "name": "covid-data",
+  "name": "uk-vax",
   "version": "1.0.0",
   "scripts": {
     "build": "next build",
