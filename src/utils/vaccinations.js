@@ -3,15 +3,15 @@ async function getData({ latestBy }) {
     url += '?filters=areaName=United Kingdom;areaType=overview';
     url += `&latestBy=${latestBy}`;
     url += `&structure={"date":"date","value":"${latestBy}"}`;
-  
+
     try {
-      const response = await fetch(url);
-      const json = await response.json();
-      return json?.data[0]?.value;
+        const response = await fetch(url);
+        const json = await response.json();
+        return json?.data[0]?.value;
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
-  }
+}
 
 export async function getTotalFirstDoses() {
     return getData({ latestBy: 'cumPeopleVaccinatedFirstDoseByPublishDate' });
