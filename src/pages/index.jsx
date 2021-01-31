@@ -7,10 +7,10 @@ function Index({ totalVaccinations }) {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-full">
       <div className="flex justify-center p-3">
-        <VaccinationProgress color="yellow-400" title="First Dose" total={firstDose} />
+        <VaccinationProgress colour="text-yellow-400" title="First Dose" total={firstDose} />
       </div>
       <div className="flex justify-center p-3">
-        <VaccinationProgress color="green-400" title="Second Dose" total={secondDose} />
+        <VaccinationProgress colour="text-green-400" title="Second Dose" total={secondDose} />
       </div>
     </section>
   );
@@ -24,7 +24,7 @@ export async function getStaticProps() {
         secondDose: await getTotalSecondDoses(),
       },
     },
-    revalidate: 1,
+    revalidate: 10,
   }
 }
 
