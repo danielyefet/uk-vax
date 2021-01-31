@@ -1,6 +1,6 @@
 module.exports = {
   purge: ['./src/pages/**/*.jsx', './src/components/**/*.jsx'],
-  darkMode: false,
+  darkMode: 'media',
   theme: {
     extend: {},
   },
