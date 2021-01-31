@@ -11,7 +11,7 @@ function Index({ totalVaccinations }) {
                 <title>COVID - Percentage Vaccinated - United Kingdom</title>
             </Head>
             <div className="m-auto max-w-lg p-3">
-                <h1 className="text-center text-3xl pt-6 pb-3 text-gray-500">Coronavirus Vaccine Status (UK)</h1>
+                <h1 className="text-center text-3xl pt-6 pb-3 text-gray-600">Coronavirus Vaccine Status (UK)</h1>
                 <section className="grid grid-cols-1 md:grid-cols-2 min-h-full">
                     <div className="flex justify-center p-3">
                         <VaccinationProgress colour="text-yellow-400" title="First Dose" total={firstDose} />
