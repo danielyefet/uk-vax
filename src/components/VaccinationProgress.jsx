@@ -1,9 +1,9 @@
 import numeral from 'numeral';
 
 function VaccinationProgress({ title, total, colour = 'text-yellow-400' }) {
-    const totalPopulation = 66600000;
+    const totalAdults = 52632729;
     const formatedTotalVacinations = numeral(total).format();
-    const percentageVaccinated = `${((100 * total) / totalPopulation).toFixed(2)}`;
+    const percentageVaccinated = `${((100 * total) / totalAdults).toFixed(2)}`;
     const size = 70;
 
     return (
